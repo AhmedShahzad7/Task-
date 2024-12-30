@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login/SignUp</title>
+        <style>
+            .maindiv{
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
+                position: relative;
+            }
+            .maindiv::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./LoginbackgroundImage.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px); 
+            z-index: -1;
+        }
+            .content {
+            position: relative;
+            z-index: 1; 
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .login-form,.signup-form{
+            background-color: rgba(0, 0, 0, 0.5); 
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .login-form input,.signup-form input {
+            width: 85%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 1rem;
+            border: 2px solid orange;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .login-form button, .signup-form button {
+            width: 50%;
+            padding: 10px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .login-form button:hover ,.signup-form button:hover {
+            background-color: darkorange;
+        }
+        .content p {
+            font-size: 1rem;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .content a {
+            color: orange;
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes flip {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}
+
+/* Apply the flip animation to the login-form */
+.flip-animation {
+    animation: flip 1s ease-in-out;
+}
+        </style>
+    </head>
+    <body>
+        <div class="maindiv">
+            <div class="content">
+                <div class="login-form flip-animation" id="loginForm">
+                <form>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Submit</button>
+                </form>
+                <p style="font-size: 25px;">Don't have an account?<a style="color: orange;"  href="javascript:void(0);" id="signupLink">Sign up</a></p>
+                </div>
+                <div class="signup-form hidden" id="signupForm">
+                    <form>
+                        <input type="text" id="fullName" placeholder="Full Name" required>
+                        <input type="email" id="signupEmail" placeholder="Email" required>
+                        <input type="password" id="signupPassword" placeholder="Password" required>
+                        <button type="submit">Create Account</button>
+                    </form>
+                    <p style="font-size: 25px;">Already have an account? <a href="javascript:void(0);" id="loginLink">Login</a></p>
+                </div>
+            </div>
+        </div>
+        <script>
+            
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const signupLink = document.getElementById('signupLink');
+            const loginLink = document.getElementById('loginLink');
+    
+            
+            signupLink.addEventListener('click', function() {
+                
+                loginForm.classList.add('flip-animation');
+                setTimeout(function() {
+                    loginForm.classList.add('hidden');
+                    signupForm.classList.remove('hidden');
+                    signupForm.classList.add('flip-animation');
+                }, 500);
+            });
+    
+            
+            loginLink.addEventListener('click', function() {
+                
+                signupForm.classList.add('flip-animation');
+                setTimeout(function() {
+                    signupForm.classList.add('hidden');
+                    loginForm.classList.remove('hidden');
+                    loginForm.classList.add('flip-animation');
+                }, 500); 
+            });
+    
+            
+            document.getElementById('loginFormSubmit').addEventListener('submit', function(event) {
+                event.preventDefault();  
+                alert('Login form submitted');
+            });
+    
+            document.getElementById('signupFormSubmit').addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                alert('Sign up form submitted');
+            });
+        </script>
+    </body>
+</html>
